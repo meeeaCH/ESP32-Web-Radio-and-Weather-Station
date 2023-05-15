@@ -29,7 +29,8 @@ ESP32 Web Radio and Weather Station. This is a single station web radio. The Rad
 
 ## License:
 ESP32-Web-Radio-and-Weather-Station: This is a single station radio, it uses a DHT11 sensor and gets the weather data from openweathermap.org.
-Copyright (C) 2023 Krisztián Pfeifer.
+
+Copyright (C) 2023 Krisztián Pfeifer (meeeaCH).
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
