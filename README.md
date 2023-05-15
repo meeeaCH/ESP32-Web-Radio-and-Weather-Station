@@ -1,4 +1,4 @@
-# ESP32-Web-Radio-and-Weather-Station
+# ESP32-Web-Radio-and-Weather-Station.
 
 ## About
 ESP32 Web Radio and Weather Station. This is a single station web radio. The Radio part was made by https://github.com/vincegellar . I used an NodeMCU ESP32-S, VS1003, OS-1838 IR reciver, SSD1306 display and a DHT11 sensor.
@@ -25,22 +25,21 @@ ESP32 Web Radio and Weather Station. This is a single station web radio. The Rad
 - Reg... on openweathermap.org to get an API key.
 - Look for a station and set it up in main.cpp.
 - Set your Wi-Fi SSID and Password.
-- Upload the program. (You may need to hold down the boot button on the ESP and releases it when you see "Uploading...." in the terminal.)
+- Upload the program. (You may need to hold down the boot button on the ESP and releases it when you see "Connecting...." in the terminal.)
 
 ## License:
 ESP32-Web-Radio-and-Weather-Station: This is a single station radio, it uses a DHT11 sensor and gets the weather data from openweathermap.org.
 Copyright (C) 2023 Krisztián Pfeifer.
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
