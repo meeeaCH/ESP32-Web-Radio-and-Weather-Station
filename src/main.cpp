@@ -34,7 +34,7 @@
 
   OLED Wiring:  
   ----------------------
-  | SSD1036 |  ESP32   |
+  | SSD1306 |  ESP32   |
   ----------------------
   |   SCL   |   IO22   |
   |   SDA   |   IO21   |
@@ -42,7 +42,7 @@
   |   GND   |   GND    |
   ----------------------
 
-  platformio.ini:
+  This needs to be in the platformio.ini:
 
   [env:esp32dev]
   platform = espressif32
@@ -153,9 +153,9 @@ String countryCode = "HU";
 
 // THE DEFAULT TIMER IS SET TO 10 SECONDS FOR TESTING PURPOSES
 // For a final application, check the API call limits per hour/minute to avoid getting blocked/banned
-unsigned long lastTime = 0;
+//unsigned long lastTime = 0;
 // Timer set to 10 minutes (600000)
-unsigned long timerDelay = 600000;
+//unsigned long timerDelay = 600000;
 // Set timer to 10 seconds (10000)
 //unsigned long timerDelay = 10000;
 String jsonBuffer;
@@ -175,7 +175,7 @@ void setup() {
   delay(3000);
 
   // This can be set in the IDE no need for ext library
-  // system_update_cpu_freq(160);
+  //system_update_cpu_freq(160);
 
   Serial.println("\n\nmeeeaCH's Web Radio");
   reciver.enableIRIn();
@@ -217,6 +217,8 @@ void setup() {
                 "Host: " + host + "\r\n" +
                 "Connection: close\r\n\r\n");
   //-------------------------------------------------------------------------------------------------//
+  //------------------------------------------DHT & OLED setup---------------------------------------//
+  //-------------------------------------------------------------------------------------------------//
   //DHT11 setup.
   dht.begin();
 
@@ -237,9 +239,8 @@ void setup() {
 //--------------------------------------------------------------------------------------------------------------------//
 //Show Menu.
 void Menu(){
- // do{
   display.clearDisplay();
-  display.setTextSize(1); /*OLED text font size*/
+  display.setTextSize(1); 
   display.setCursor(20,5);
   display.print("1 - Web Radio");
   display.setCursor(20,25);
@@ -266,17 +267,12 @@ void Menu(){
 		Serial.println(irNum);
     reciver.resume();
     }
-
-
-
- //}while(irNumEq == 4);
 }
 //--------------------------------------------------------------------------------------------------------------------//
 
 //--------------------------------------------------------------------------------------------------------------------//
 //InsideTemp shown, data got from DHT11 sensor.
 void InsideTemp(){
-  //do{
   float t = dht.readTemperature();  /*read temperature*/
   float h = dht.readHumidity();    /*read humidity*/  
   //float t = 20;  /*read temperature test*/
@@ -295,7 +291,7 @@ void InsideTemp(){
     display.clearDisplay();  /*clear OLED display before displaying reading*/
     display.setTextSize(1); /*OLED text font size*/
     display.setCursor(0,0);
-    display.print("Homerseklet: ");
+    display.print("Homerseklet: ");  // <------- Change this to your language.
     display.setTextSize(2);
     display.setCursor(0,10);
     display.print(t);       /*print temperature in Celsius*/
@@ -308,7 +304,7 @@ void InsideTemp(){
 
     display.setTextSize(1);
     display.setCursor(0, 35);
-    display.print("Paratartalom: ");
+    display.print("Paratartalom: ");  // <------- Change this to your language.
     display.setTextSize(2);
     display.setCursor(0, 45);
     display.print(h);      /*prints humidity percentage*/
@@ -316,7 +312,6 @@ void InsideTemp(){
     display.display();
   }
   delay(1000);
-  //Serial.println("InsideTemp");
 //IR switch
   if (IrReceiver.decode())
     {
@@ -330,20 +325,16 @@ void InsideTemp(){
     if(irNum == "8"){
       irNumEq = 4;
     }
-		Serial.println(irNum);
     reciver.resume();
     }
-
-  //}while(irNumEq == 2);
 }
 //--------------------------------------------------------------------------------------------------------------------//
 
 //--------------------------------------------------------------------------------------------------------------------//
-//OutsideTemo shown, data got from the internet. OpenweatherMap API.
+//OutsideTemp, data got from the internet. OpenWeatherMap API.
 float convertStringtoFloat(String temp){
   float floatTemp = temp.toFloat();
-  float cTemp = floatTemp - K;
-
+  float cTemp = floatTemp - K;  //The value is in Kelvin, here it is converted to Celsius.
   return cTemp;
 }
 
@@ -370,14 +361,11 @@ String httpGETRequest(const char* serverName) {
   }
   // Free resources
   http.end();
-
   return payload;
 }
 
 void OutsideTemp(){
-  //do{
-  /*  // Send an HTTP GET request
-  if ((millis() - lastTime) > timerDelay) {*/
+  // Send an HTTP GET request
     // Check WiFi connection status
     if(WiFi.status()== WL_CONNECTED){
       String serverPath = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "," + countryCode + "&APPID=" + openWeatherMapApiKey;
@@ -396,7 +384,7 @@ void OutsideTemp(){
       display.clearDisplay();  /*clear OLED display before displaying reading*/
       display.setTextSize(1); /*OLED text font size*/
       display.setCursor(0,0);
-      display.print("Homerseklet: ");
+      display.print("Homerseklet: ");   // <------- Change this to your language.
       display.setTextSize(2);
       display.setCursor(0,10);
       display.print(convertStringtoFloat(sTemp));       /*print temperature in Celsius*/
@@ -409,7 +397,7 @@ void OutsideTemp(){
 
       display.setTextSize(1);
       display.setCursor(0, 35);
-      display.print("Paratartalom: ");
+      display.print("Paratartalom: ");    // <------- Change this to your language.
       display.setTextSize(2);
       display.setCursor(0, 45);
       display.print(myObject["main"]["humidity"]);      /*prints humidity percentage*/
@@ -419,11 +407,8 @@ void OutsideTemp(){
     }
     else {
       Serial.println("WiFi Disconnected");
-    }
-    /*
-    lastTime = millis();
-  }*/
-
+    } 
+  
   //IR switch
   if (IrReceiver.decode())
     {
@@ -437,12 +422,9 @@ void OutsideTemp(){
     if(irNum == "8"){
       irNumEq = 4;
     }
-		//Serial.println(irNum);
     reciver.resume();
     }
-
-    delay(10000);
- // }while(irNumEq = 3);
+    delay(60000);  //10sec delay between reqests. It is advised to increase this number so you won't run out of API calls.
 }
 
 //--------------------------------------------------------------------------------------------------------------------//
@@ -451,7 +433,7 @@ void OutsideTemp(){
 //Internet Radio
 void Radio(){
   display.clearDisplay();
-  display.setTextSize(2); /*OLED text font size*/
+  display.setTextSize(2);
   display.setCursor(10,5);
   display.print("Web Radio");
   display.setTextSize(1);
@@ -486,12 +468,9 @@ void Radio(){
     if(irNum == "8"){
       irNumEq = 4;
     }
-		//Serial.println(irNum);
     reciver.resume();
     }
-
-
-  }while(irNumEq == 1);
+  }while(irNumEq == 1);  //This runs only the the radio part and do not refresh the screen. It can be removed.
 }
 //--------------------------------------------------------------------------------------------------------------------//
 
@@ -516,7 +495,6 @@ void loop() {
     if(irNum == "8"){
       irNumEq = 4;
     }
-		//Serial.println(irNum);
     reciver.resume();
     }
 
