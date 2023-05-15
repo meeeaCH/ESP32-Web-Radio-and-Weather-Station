@@ -1,7 +1,7 @@
 # ESP32-Web-Radio-and-Weather-Station
 
 ## About
-ESP32 Web Radio and Weather Station. This is a single station web radio. I used an NodeMCU ESP32-S, VS1003, SSD1306 and a DHT11.
+ESP32 Web Radio and Weather Station. This is a single station web radio. The Radio part was made by https://github.com/vincegellar . I used an NodeMCU ESP32-S, VS1003, OS-1838 IR reciver, SSD1306 display and a DHT11 sensor.
 
 ## Parts List
 - NodeMCU ESP32-S
@@ -22,10 +22,10 @@ ESP32 Web Radio and Weather Station. This is a single station web radio. I used 
 ## Instructions:
 - Build the hardware.
 - In VSCode use PlatformIO and set it up. In the main.cpp you can find the .ini's content.
-- Reg on openweathermap.org to get an API key.
-- Look for a station and set it up.
+- Reg... on openweathermap.org to get an API key.
+- Look for a station and set it up in main.cpp.
 - Set your Wi-Fi SSID and Password.
-- Upload the program. (You need to hold down the boot button on the ESP and releas it when you see "Uploading...." in the terminal.)
+- Upload the program. (You may need to hold down the boot button on the ESP and releases it when you see "Uploading...." in the terminal.)
 
 ## License:
 ESP32-Web-Radio-and-Weather-Station: This is a single station radio, it uses a DHT11 sensor and gets the weather data from openweathermap.org.
