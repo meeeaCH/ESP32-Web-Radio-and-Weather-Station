@@ -126,11 +126,11 @@ VS1053 player(VS1053_CS, VS1053_DCS, VS1053_DREQ);
 WiFiClient client;
 
 // WiFi settings example, substitute your own
-const char *ssid = "magor";
-const char *password = "19960716";
+const char *ssid = "YOUR SSID";
+const char *password = "YOUR PW";
 
 //  http://comet.shoutca.st:8563/1
-const char *host = "icast.connectmedia.hu";
+const char *host = "icast.connectmedia.hu";  
 const char *path = "/5201/live.mp3";
 int httpPort = 80;
 
@@ -145,19 +145,11 @@ uint8_t mp3buff[64];
 //-------------------------------------------------------------------------------------------------//
 const float K = 273.15;  //To convert Kelvin to Celsiusra.
 // Your API key
-String openWeatherMapApiKey = "239b17a6199131b63a65a9b8b567563c";
+String openWeatherMapApiKey = "YOUR API KEY";
 
 // Your country code and city
-String city = "Őcsény";
-String countryCode = "HU";
-
-// THE DEFAULT TIMER IS SET TO 10 SECONDS FOR TESTING PURPOSES
-// For a final application, check the API call limits per hour/minute to avoid getting blocked/banned
-//unsigned long lastTime = 0;
-// Timer set to 10 minutes (600000)
-//unsigned long timerDelay = 600000;
-// Set timer to 10 seconds (10000)
-//unsigned long timerDelay = 10000;
+String city = "YOUR CITY";
+String countryCode = "YOUR COUNTRY CODE";
 String jsonBuffer;
 //-------------------------------------------------------------------------------------------------//
 
@@ -173,12 +165,8 @@ void setup() {
   // Wait for VS1053 and PAM8403 to power up
   // otherwise the system might not start up correctly
   delay(3000);
+  Serial.println("\n\nmeeeaCH's Web Radio and Weather Station");  //<-- change it to whatever
 
-  // This can be set in the IDE no need for ext library
-  //system_update_cpu_freq(160);
-
-  Serial.println("\n\nmeeeaCH's Web Radio");
-  reciver.enableIRIn();
   SPI.begin();
   player.begin();
   //This part doesn't work with my VS1003/VS1053, God knows what it is. :D
@@ -221,7 +209,7 @@ void setup() {
   //-------------------------------------------------------------------------------------------------//
   //DHT11 setup.
   dht.begin();
-
+  reciver.enableIRIn();
   //Setting up display.
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {   /*I2C Address at which OLED is connected*/
     Serial.println(F("SSD1306 allocation failed"));
