@@ -1,7 +1,7 @@
 # ESP32-Web-Radio-and-Weather-Station.
 
 ## About
-ESP32 Web Radio and Weather Station. This is a single station web radio. The Radio part was made by https://github.com/vincegellar . I used an NodeMCU ESP32-S, VS1003, OS-1838 IR reciver, SSD1306 display and a DHT11 sensor.
+ESP32 Web Radio and Weather Station. This is a single station web radio. The Radio part was made by https://github.com/vincegellar . I used an NodeMCU ESP32-S, VS1003/VS1053 MP3 Decoder, OS-1838 IR reciver, SSD1306 display and a DHT11 sensor.
 
 ## Parts List
 - NodeMCU ESP32-S.

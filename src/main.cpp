@@ -99,10 +99,7 @@ DHT dht(DHTPIN, DHTTYPE);
 #define RECIVER_PIN 17
 IRrecv reciver(RECIVER_PIN);
 decode_results results;
-/*Serial
-int menuOption;
-int menuBuffer;
-*/
+
 //IR remote
 String irNum = "";
 int irNumEq = 4;
@@ -129,7 +126,7 @@ WiFiClient client;
 const char *ssid = "YOUR SSID";
 const char *password = "YOUR PW";
 
-//  http://comet.shoutca.st:8563/1
+//  http://comet.shoutca.st:8563/1                        HERE YOU CAN SET THE STATION.
 const char *host = "icast.connectmedia.hu";  
 const char *path = "/5201/live.mp3";
 int httpPort = 80;
@@ -165,11 +162,11 @@ void setup() {
   // Wait for VS1053 and PAM8403 to power up
   // otherwise the system might not start up correctly
   delay(3000);
-  Serial.println("\n\nmeeeaCH's Web Radio and Weather Station");  //<-- change it to whatever
+  Serial.println("\n\nmeeeaCH's Web Radio and Weather Station");  //<-- Change it to whatever.
 
   SPI.begin();
   player.begin();
-  //This part doesn't work with my VS1003/VS1053, God knows what it is. :D
+  //This part doesn't work with my VS1003/VS1053.
    /* if (player.getChipVersion() == 4) { // Only perform an update if we really are using a VS1053, not. eg. VS1003
         player.loadDefaultVs1053Patches(); 
     }*/
